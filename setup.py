@@ -24,6 +24,7 @@ setup(
         'Topic :: Utilities'
     ],
     install_requires=[
-        'smartypants>=1.8.3'
+        'smartypants>=1.8.3',
+        'titlecase==0.12.0'
     ],
 )

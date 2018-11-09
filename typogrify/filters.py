@@ -1,9 +1,24 @@
 import re
-from typogrify.packages.titlecase import titlecase  # NOQA
 
 class TypogrifyError(Exception):
     """ A base error class so we can catch or scilence typogrify's errors in templates """
     pass
+
+def titlecase(text):
+     """Support for titlecase.py's titlecasing
+
+     >>> titlecase("this V that")
+     'This v That'
+
+     >>> titlecase("this is just an example.com")
+     'This Is Just an example.com'
+     """
+     try:
+         import titlecase
+     except ImportError:
+         raise TypogrifyError("Error in {% titlecase %} filter: The titlecase.py library isn't installed.")
+     else:
+         return titlecase.titlecase(text)
 
 def process_ignores(text, ignore_tags=None):
     """ Creates a list of tuples based on tags to be ignored.
